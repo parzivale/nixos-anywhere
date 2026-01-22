@@ -48,15 +48,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1748765518,
-        "narHash": "sha256-vftOR+7zwnMWl5UpG32GL1VBeNGTDZZT0hv+2uNuBGw=",
-        "owner": "Mic92",
+        "lastModified": 1769079217,
+        "narHash": "sha256-R6qzhu+YJolxE2vUsPQWWwUKMbAG5nXX3pBtg8BNX38=",
+        "owner": "Enzime",
         "repo": "nix-vm-test",
-        "rev": "d6642fbaf42fc98883d84bab66cd0ec720d9dd0c",
+        "rev": "58c15f78947b431d6c206e0966500c7e9139bd2f",
         "type": "github"
       },
       "original": {
-        "owner": "Mic92",
+        "owner": "Enzime",
+        "ref": "pr-105-latest",
         "repo": "nix-vm-test",
         "type": "github"
       }
