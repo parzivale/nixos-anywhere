@@ -663,10 +663,10 @@ generateHardwareConfig() {
       # We can use the following Bash-ism described at: https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion-1
       # For more information: https://unix.stackexchange.com/questions/379181/escape-a-variable-for-use-as-content-of-another-script
       runSshNoTty -o ConnectTimeout=10 \
-       'sh nix shell "${nixOptions[@]@Q}" nixpkgs#nixos-facter -c ${maybeSudo} nixos-facter >"$hardwareConfigPath"'
+       nix shell "${nixOptions[@]@Q}" nixpkgs#nixos-facter -c ${maybeSudo} nixos-facter >"$hardwareConfigPath"
     else
       step "Generating facter.json using nixos-facter"
-      runSshNoTty -o ConnectTimeout=10  'sh ${maybeSudo} nixos-facter >"$hardwareConfigPath"'
+      runSshNoTty -o ConnectTimeout=10  ${maybeSudo} nixos-facter >"$hardwareConfigPath"
     fi
     ;;
   nixos-generate-config)
