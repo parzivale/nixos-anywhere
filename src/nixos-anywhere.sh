@@ -463,10 +463,10 @@ parseArgs() {
 runSshNoTty() {
   # shellcheck disable=SC2029
   # We want to expand "$@" to get the command to run over SSH
-  ssh -t sh "${sshArgs[@]}" "$sshConnection" "$@"
+  ssh  "${sshArgs[@]}" "$sshConnection" -t sh "$@"
 }
 runSshTimeout() {
-  timeout 10 ssh -t sh "${sshArgs[@]}" "$sshConnection" "$@"
+  timeout 10 ssh "${sshArgs[@]}" "$sshConnection" -t sh "$@"
 }
 runSsh() {
   (
@@ -476,7 +476,7 @@ runSsh() {
     fi
     # shellcheck disable=SC2029
     # We want to expand "$@" to get the command to run over SSH
-    ssh -t sh "$sshTtyParam" "${sshArgs[@]}" "$sshConnection" "$@"
+    ssh "$sshTtyParam" "${sshArgs[@]}" "$sshConnection" -t sh "$@"
   )
 }
 
