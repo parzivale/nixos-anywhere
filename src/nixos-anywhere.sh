@@ -324,7 +324,7 @@ parseArgs() {
         abort "Supported values for --build-on are auto, local and remote. Unknown mode : $2"
         ;;
       esac
-
+ 
       shift
       ;;
     --extra-files)
@@ -463,10 +463,10 @@ parseArgs() {
 runSshNoTty() {
   # shellcheck disable=SC2029
   # We want to expand "$@" to get the command to run over SSH
-  ssh "${sshArgs[@]}" "$sshConnection" "$@"
+  ssh "${sshArgs[@]}" "$sshConnection" 'sh "$@"'
 }
 runSshTimeout() {
-  timeout 10 ssh "${sshArgs[@]}" "$sshConnection" "$@"
+  timeout 10 ssh "${sshArgs[@]}" "$sshConnection" 'sh "$@"'
 }
 runSsh() {
   (
@@ -476,7 +476,7 @@ runSsh() {
     fi
     # shellcheck disable=SC2029
     # We want to expand "$@" to get the command to run over SSH
-    ssh "$sshTtyParam" "${sshArgs[@]}" "$sshConnection" "$@"
+    ssh "$sshTtyParam" "${sshArgs[@]}" "$sshConnection" 'sh "$@"'
   )
 }
 
@@ -663,10 +663,10 @@ generateHardwareConfig() {
       # We can use the following Bash-ism described at: https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Shell-Parameter-Expansion-1
       # For more information: https://unix.stackexchange.com/questions/379181/escape-a-variable-for-use-as-content-of-another-script
       runSshNoTty -o ConnectTimeout=10 \
-        nix shell "${nixOptions[@]@Q}" nixpkgs#nixos-facter -c ${maybeSudo} nixos-facter >"$hardwareConfigPath"
+       'sh nix shell "${nixOptions[@]@Q}" nixpkgs#nixos-facter -c ${maybeSudo} nixos-facter >"$hardwareConfigPath"'
     else
       step "Generating facter.json using nixos-facter"
-      runSshNoTty -o ConnectTimeout=10 ${maybeSudo} nixos-facter >"$hardwareConfigPath"
+      runSshNoTty -o ConnectTimeout=10  'sh ${maybeSudo} nixos-facter >"$hardwareConfigPath"'
     fi
     ;;
   nixos-generate-config)
