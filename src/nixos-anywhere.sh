@@ -567,7 +567,7 @@ uploadSshKey() {
 importFacts() {
   step Gathering machine facts
   local facts filteredFacts
-  if ! facts=$(runSsh -o ConnectTimeout=10 enableDebug=$enableDebug sh -- <"$here"/get-facts.sh); then
+  if ! facts=$(runSsh -o ConnectTimeout=10 enableDebug=$enableDebug -- <"$here"/get-facts.sh); then
     exit 1
   fi
   filteredFacts=$(echo "$facts" | grep -E '^(has|is|remote)[A-Za-z0-9_]+=\S+')
